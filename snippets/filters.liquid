@@ -1,0 +1,407 @@
+{%- assign filters_default = search.filters | default: collection.filters -%}
+
+<form data-collection-filters-form class="new_collection__filters collection__filters">
+  {%- for filter in filters_default -%}
+    {%- liquid
+      assign filter_check_active = filter.values | where: 'active', false
+      assign filter_check_count = filter.values | where: 'count', 0
+      assign filter_hidden = false
+
+      if filter.type == 'list' and filter.values.size == filter_check_active.size and filter.values.size == filter_check_count.size
+        assign filter_hidden = true
+      endif
+
+      assign animation_delay = animation_delay | plus: animation_delay_increment
+
+      if forloop.first and animation_delay == 50
+        assign animation_delay = animation_delay | plus: 200
+      endif
+    -%}
+
+    <div 
+      class="collection__sidebar__group{% if filter_hidden %} collection__sidebar__group--hidden{% endif %}"
+      data-animation="{{ animation_name }}"
+      data-animation-duration="{{ animation_duration }}"
+      {% if filter_hidden %}
+        style="display: none;"
+        {% assign animation_delay = animation_delay | minus: animation_delay_increment %}
+      {% endif %}
+      data-animation-delay="{{ animation_delay }}"
+    >
+      <p class="collection__sidebar__heading is-active" tabindex="0" data-focus-element>
+        <span>{{ filter.label }} </span>
+        {%- if filter.active_values.size > 0 and false -%}
+          <span>({{ filter.active_values.size }})</span>
+        {%- endif -%}
+
+        {% comment %}{%- render 'icon-plus' -%}{% endcomment %}
+        {% comment %}{%- render 'icon-minus' -%}{% endcomment %}
+      </p>
+
+      {%- assign option_name_handle_separator = filter.label | handle | prepend: ',' | append: ',' -%}
+      {%- if settings.color_swatches -%}
+  {% comment %} Determine if current option matches swatch handle translations {% endcomment %}
+  {%- assign is_swatch_option = false -%}
+  {%- assign swatch_translation = 'general.swatches.color' | t -%}
+  {%- assign translation_string = swatch_translation | remove: '  ' | replace: ', ', ',' | replace: ' ,', ',' | replace: ',', '____' | handle | replace: '____', ',' | append: ',' | prepend: ',' -%}
+  
+  {%- if translation_string contains option_name_handle_separator -%}
+    {%- assign is_swatch_option = true -%}
+  {%- endif -%}
+{%- endif -%}
+
+      {%- case filter.type -%}
+        {%- when 'list' or 'boolean' -%}
+          <ul class="collection-nav">
+            {%- for filter_value in filter.values -%}
+              <li class="sidebar__item{% if filter_value.active %} sidebar__item--active link--remove {% if filter.label == 'Metal' %}sidebar__item--active-metal{% endif %}{% elsif filter_value.count == 0 and filter_value.active == false %} link--disable{% else %} link--add{% endif %}{% if forloop.index > 10 %} is-hidden{% endif %} {% if filter.label == 'Ring Style' or  filter.label == 'SHAPE' %}sidebar__item-custom{% endif %}"{% if forloop.index > 10 %} data-link-hidden{% endif %}>
+                {% if filter_value.active %}
+                {% endif %}
+                {% if filter.label == 'SHAPE' %}
+                  <i class="iconfont icon-{{ filter_value.label }} icon-custom"></i>
+                {% elsif filter.label == 'Ring Style' %}
+                  <i class="iconfont icon-{{ filter_value.label | replace: ' ', '-'  }} icon-custom"></i>
+                {% elsif filter.label == 'Metal' %}
+                  <div class="metal">
+                    <div class="metal-color" style="background: var(--{{ filter_value.label | replace: ' ', '-'  }})"></div>
+                  </div>
+                {% endif %}
+                <input type="checkbox"
+                  name="{{ filter_value.param_name }}"
+                  value="{{ filter_value.value }}"
+                  id="filter-{{ filter.label }}-{{ forloop.index }}"
+                  {% if filter_value.active -%}checked{%- endif %}
+                  {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}>
+                <label for="filter-{{ filter.label }}-{{ forloop.index }}">
+                  {%- if is_swatch_option -%}
+                    <span class="swatch__button swatch__button--{{ settings.swatch_style }}" data-swatch="{{ filter_value.label | escape_once }}"></span>
+                  {%- endif -%}
+
+                  {{ filter_value.label }}
+                </label>
+              </li>
+            {%- endfor -%}
+          </ul>
+
+          {%- if filter.values.size > 10 -%}
+            <div class="collection__sidebar__actions">
+              <a href="#" data-show-more class="collection__sidebar__link">
+                {%- render 'icon-arrow-separate-vertical' -%}
+                {{ 'collections.general.show_more' | t }}
+              </a>
+            </div>
+          {%- endif -%}
+        {%- when 'price_range' -%}
+          <div class="filter__price" data-range-holder>
+            {%- liquid
+              if shop.money_format contains "comma_separator"
+                assign filter_max_money = filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.'
+              else
+                assign filter_max_money = filter.range_max | money_without_currency | replace: ',', ''
+              endif
+              assign filter_max_money_ceil = filter_max_money | ceil
+              assign filter_min_value = 0
+              assign filter_max_value = filter_max_money_ceil
+
+              if filter.min_value.value
+                if shop.money_format contains "comma_separator"
+                  assign filter_min_value = filter.min_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' | floor
+                else
+                  assign filter_min_value = filter.min_value.value | money_without_currency | replace: ',', '' | floor
+                endif
+              endif
+
+              if filter.max_value.value
+                if shop.money_format contains "comma_separator"
+                  assign filter_max_value = filter.max_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' | ceil
+                else
+                  assign filter_max_value = filter.max_value.value | money_without_currency | replace: ',', '' | ceil
+                endif
+              endif
+            -%}
+
+            <div class="filter__price__range range" data-range-slider data-range-filter-update data-se-min="0" data-se-step="1" data-se-min-value="{{ filter_min_value }}" data-se-max-value="{{ filter_max_value }}" data-se-max="{{ filter_max_money_ceil }}">
+              <div class="range__dot range__dot--left" data-range-left>
+                <span>&nbsp;</span>
+              </div>
+              <div class="range__dot range__dot--right" data-range-right>
+                <span>&nbsp;</span>
+              </div>
+              <div class="range__line">
+                <span data-range-line>&nbsp;</span>
+              </div>
+            </div>
+
+            <div class="filter__price__fields">
+              <div class="filter__price__field filter__price__from">
+                <span>{{ cart.currency.symbol }}</span>
+                <span>{{ filter_min_value }}</span>
+
+                <input
+                  data-field-price-min
+                  class="filter__price__input"
+                  name="{{ filter.min_value.param_name }}"
+                  id="filter-price-from-{{ filter.label }}-{{ forloop.index }}"
+                  {% if filter.min_value.value %}value="{{ filter_min_value }}"{% endif %}
+                  type="number"
+                  placeholder="{{ filter_min_value }}"
+                  min="0"
+                  max="{{ filter_max_money }}">
+
+                <label for="filter-price-from-{{ filter.label }}-{{ forloop.index }}">{{ 'products.general.from' | t }}</label>
+              </div>
+              {% comment %}<div class="filter__price__spacer">-</div>{% endcomment %}
+              <div class="filter__price__field filter__price__to">
+                <span>{{ cart.currency.symbol }}</span>
+                <span>{{ filter_max_value }}</span>
+
+                <input
+                  data-field-price-max
+                  class="filter__price__input"
+                  name="{{ filter.max_value.param_name }}"
+                  id="filter-price-to-{{ filter.label }}-{{ forloop.index }}"
+                  {% if filter.max_value.value %}value="{{ filter_max_value }}"{% endif %}
+                  type="number"
+                  placeholder="{{ filter_max_value }}"
+                  min="0"
+                  max="{{ filter_max_money_ceil }}">
+
+                <label for="filter-price-to-{{ filter.label }}-{{ forloop.index }}">{{ 'products.general.to' | t }}</label>
+              </div>
+            </div>
+          </div>
+        {%- else -%}
+      {%- endcase -%}
+    </div>
+  {%- endfor -%}
+</form>
+<style>
+  .new_collection__filters{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /*grid-row-gap: 40px;*/
+    grid-column-gap: 32px;
+  }
+
+  .new_collection__filters .collection__sidebar__group{
+    display: flex;
+    margin-top: 0 !important;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+    opacity: 0.8;
+  }
+
+  .new_collection__filters .collection__sidebar__heading{
+    width: 120px;
+    border-bottom: unset;
+  }
+
+  .new_collection__filters .collection__sidebar__group {
+    /*align-items: center;*/
+    margin-bottom: 40px;
+  }
+
+  .new_collection__filters .collection__sidebar__group p{
+    margin: unset;
+    padding: unset;
+  }
+
+  .new_collection__filters .collection-nav{
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .new_collection__filters .collection-nav .sidebar__item{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: content-box;
+    margin-right: 24px;
+    margin-top: 0;
+    flex-shrink: 0;
+  }
+
+  .new_collection__filters .collection-nav .sidebar__item label{
+    margin-top: 8px;
+  }
+
+  .new_collection__filters .collection-nav .sidebar__item:last-child{
+    margin-right: 0;
+  }
+
+  .new_collection__filters .collection-nav .metal{
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 8px auto;
+    border-radius: 50%;
+    background: #FFFFFF;
+  }
+
+  .new_collection__filters .collection-nav .sidebar__item--active-metal{
+    padding: 0;
+    border: unset;
+  }
+
+  .new_collection__filters .sidebar__item--active-metal .metal{
+    border: 1px solid #2B70B4;
+  }
+
+  .new_collection__filters .collection-nav .metal-color{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+  }
+
+  .new_collection__filters .collection-nav .sidebar__item-custom{
+    margin-right: 12px;
+  }
+
+  .new_collection__filters .sidebar__item--active.sidebar__item-custom{
+    border: unset;
+  }
+
+  .new_collection__filters .sidebar__item--active.sidebar__item-custom .icon-custom{
+    border: 1px solid #2B70B4;
+  }
+
+  .new_collection__filters .collection-nav .sidebar__item-custom label{
+    justify-content: center;
+  }
+
+  .new_collection__filters .collection-nav .icon-custom{
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 8px;
+    font-size: 32px;
+  }
+
+  .new_collection__filters .collection-nav .icon-custom::before{
+    padding: 4px;
+  }
+
+  .new_collection__filters .collection-nav input[type=checkbox]{
+    padding-left: 0;
+  }
+
+  .new_collection__filters .collection-nav label{
+    font-size: 14px;
+    line-height: 20px;
+    color: #000000;
+    padding-left: 0;
+    text-transform: capitalize;
+  }
+
+  .new_collection__filters .sidebar__item--active label{
+    color: #2B70B4;
+  }
+
+  .new_collection__filters .collection-nav label::after{
+    opacity: 0;
+  }
+
+  .new_collection__filters .filter__price .range__dot{
+    border: 1px solid #E7E7E7;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    background: #FFFFFF;
+  }
+
+  .new_collection__filters .filter__price .range__dot span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    background: #90BCE8;
+    border: unset;
+  }
+
+  .new_collection__filters .filter__price{
+    flex-grow: 1;
+    margin-top: 0;
+  }
+
+  .new_collection__filters .filter__price .filter__price__fields{
+    justify-content: space-between;
+  }
+
+  .new_collection__filters .filter__price .filter__price__input{
+    opacity: 0;
+    max-width: 0;
+  }
+
+
+  .new_collection__filters .filter__price .filter__price__field{
+    padding: 0 0 0 24px;
+    border: unset;
+    font-size: 14px;
+    line-height: 16px;
+    color: #000000;
+  }
+
+  .new_collection__filters .filter__price .filter__price__field span{
+    margin-right: 0;
+  }
+
+  .new_collection__filters .filter__price .filter__price__to{
+    padding: 0 24px 0 0;
+    justify-content: flex-end;
+    border: unset;
+  }
+
+  .new_collection__filters .filter__price .range__line{
+    border: 1px solid #E7E7E7;
+  }
+
+  .new_collection__filters .filter__price .range__line span{
+    background: #90BCE8;
+  }
+
+  @media screen and (max-width: 768px) {
+    .new_collection__filters{
+      display: block;
+    }
+
+    .new_collection__filters .collection__sidebar__group{
+      display: block;
+      margin-bottom: 0;
+    }
+
+    .new_collection__filters .collection__sidebar__group::after{
+      display: block;
+      content: "";
+      width: 100%;
+      height: 1px;
+      margin: 20px 0;
+      background: #E6EBF0;
+    }
+
+    .new_collection__filters .collection__sidebar__group:last-child::after{
+      display: none;
+    }
+
+    .new_collection__filters .collection-nav{
+      margin-top: 16px;
+      padding-bottom: 16px;
+      overflow: auto;
+    }
+
+    .new_collection__filters .collection__sidebar__heading{
+      font-size: 14px;
+      line-height: 16px;
+      color: #000000;
+    }
+  }
+</style>
