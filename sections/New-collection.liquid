@@ -1,0 +1,255 @@
+<div class="New-collection.liquid" id="new-slide-{{ section.id }}"
+     {% if section.blocks.size > 1 %}data-loader-script="{{ 'New-collection.liquid.js' | asset_url }}"{% endif %}>
+    <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1770' %}container-1770{% elsif section.settings.container == '1170' %}container-1170{% else %}container{% endif %}">
+        {% if section.settings.title != blank %}
+            <div class="halo-block-headers text-{{ section.settings.title_align }}">
+                {% if section.settings.title != blank %}
+                    <h3 class="title">
+                        <span class="text">
+                        {{ section.settings.title }}
+                        </span>
+                    </h3>
+                {% endif %}
+            </div>
+        {% endif %}
+        <div class="new-slide-container">
+            <div class="new-slide-frame">
+                {% for block in section.blocks %}
+                    <div class="new-slide-box"></div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{%- liquid
+    assign mg_top_desktop = section.settings.mg_top_desktop
+    assign mg_top_tablet = section.settings.mg_top_tablet
+    assign mg_top_mobile = section.settings.mg_top_mobile
+    
+    assign mg_bottom_desktop = section.settings.margin_bottom
+    assign mg_bottom_tablet = section.settings.margin_bottom_tab
+    assign mg_bottom_mobile = section.settings.margin_bottom_mb
+    
+    assign color_bg = section.settings.bg_color
+
+-%}
+
+<style>
+    #new-slide-{{ section.id }} {
+        background-color: {{ color_bg }};
+    }
+
+    @media (max-width: 767px) {
+        #new-slide-{{ section.id }} {
+            padding-top: {{ mg_top_mobile | append: 'px' }};
+            padding-bottom: {{ mg_bottom_mobile | append: 'px' }};
+        }
+
+    }
+
+    @media (min-width: 1200px) {
+        #new-slide-{{ section.id }} {
+            padding-top: {{ mg_top_desktop | append: 'px' }};
+            padding-bottom: {{ mg_bottom_desktop | append: 'px' }};
+        }
+    }
+
+
+    @media (min-width: 768px) and (max-width: 1199px) {
+        #new-slide-{{ section.id }} {
+            padding-top: {{ mg_top_tablet | append: 'px' }};
+            padding-bottom: {{ mg_bottom_tablet | append: 'px' }};
+        }
+    }
+
+    #new-banner-content-{{ section.id }} .halo-block-header .title:before {
+        background-color: {{ color_title }};
+    {% unless section.settings.enable_border_title %} display: none;
+    {% endunless %}
+    }
+
+    #new-banner-content-{{ section.id }} .halo-block-header .title {
+        color: {{ section.settings.color_title }};
+        font-size: {{ section.settings.fontsize_title | append: 'px' }};
+        margin-bottom: {{ section.settings.margin_bottom_title | append: 'px' }};
+
+    }
+
+    #new-banner-content-{{ section.id }} .halo-block-header .title.text-left {
+        text-align: left;
+    }
+
+    #new-banner-content-{{ section.id }} .halo-block-header .title.text-center {
+        text-align: center;
+    }
+
+    #new-banner-content-{{ section.id }} .halo-block-header .title.text-right {
+        text-align: right;
+    }
+
+    @media (max-width: 767px) {
+        #new-banner-content-{{ section.id }} .halo-block-header .title {
+            font-size: {{ section.settings.fontsize_title_mb | append: 'px' }};
+            margin-bottom: {{ section.settings.margin_bottom_title_mo | append: 'px' }};
+        }
+    }
+</style>
+
+{% schema %}
+{
+  "name": "New-collection.liquid",
+  "class": "New-collection.liquid-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Layout:",
+      "default": "container",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "1170",
+          "label": "Container 1170"
+        },
+        {
+          "value": "1770",
+          "label": "Container 1770"
+        },
+        {
+          "value": "fullwidth",
+          "label": "Full Width"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color"
+    },
+    {
+      "type": "header",
+      "content": "Margin Bottom:"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_mb",
+      "label": "Mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_tab",
+      "label": "Tablet",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Desktop",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Margin Top"
+    },
+    {
+      "type": "range",
+      "id": "mg_top_mobile",
+      "label": "Mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "mg_top_tablet",
+      "label": "Tablet",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "mg_top_desktop",
+      "label": "Desktop",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "large_banner",
+      "name": "Large Banner",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Select Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Select Mobile Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "small_banner",
+      "name": "Small Banner",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Select Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Select Mobile Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "New-collection.liquid"
+    }
+  ]
+}
+{% endschema %}
