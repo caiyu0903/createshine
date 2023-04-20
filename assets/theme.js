@@ -3457,7 +3457,7 @@
                 }
 
                 if(product1 === null && product2 === null ){
-                    console.log("没有了是哪")
+                    console.log("没有了是哪"，this.newProductNavBox.classList)
                     // this.newProductNavBox.classList.remove('is-open')
                 }
             }
