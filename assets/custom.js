@@ -1,3 +1,5 @@
+import './theme.js';
+
 (function () {
     $(".custom-slider").slider({
         range: true,
