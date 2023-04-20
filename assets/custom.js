@@ -88,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     if (closeButton) {
         closeButton.addEventListener('click', (e) => {
             e.preventDefault();
+            const item = e.closest(selectors$U.item);
             window.sessionStorage.removeItem('this.newNavItemCart2.innerHTML');
             window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
             // 重载当前页面
