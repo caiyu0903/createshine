@@ -2422,7 +2422,7 @@
                     event.preventDefault();
                     const button1 = button.closest('[data-new-nav-item-cart]')
                     const button2 = button.closest('[data-new-nav-item-cart2]')
-                    console.log
+                    console.log(button2,"button2")
                     if (button.classList.contains(classes$L.disabled)) return;
                     if (button2) {
                         console.log("button2 is disabled")
