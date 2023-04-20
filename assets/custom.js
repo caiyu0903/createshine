@@ -1,5 +1,3 @@
-import '{{ "theme.js" | assets_url }}';
-
 (function () {
     $(".custom-slider").slider({
         range: true,
