@@ -32,7 +32,7 @@
             document.querySelector('.new-product-nav-container').className = 'new-product-nav-container is-open';
         });
     }
-    var product_list = document.querySelectorAll('.selected-product-placeholder ')
+    var product_list = document.querySelectorAll('.selected-product-placeholder .cart__item')
 
     // 表格 排序
 
