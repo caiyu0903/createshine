@@ -2219,6 +2219,7 @@
             this.cartDrawerBody = document.querySelector(selectors$U.cartDrawerBody);
             this.cartDrawerInner = document.querySelector(selectors$U.cartDrawerInner);
             this.cartEmpty = document.querySelector(selectors$U.cartEmpty);
+            this.newProductNavBox = document.querySelector(selectors$U.newProductNavBox);
             this.buttonHolder = document.querySelector(selectors$U.buttonHolder);
             this.itemsHolder = document.querySelector(selectors$U.itemsHolder);
             this.newNavItem = document.querySelector(selectors$U.newNavItem);
