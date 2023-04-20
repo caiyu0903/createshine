@@ -33,7 +33,9 @@
         });
     }
     var product_list = document.querySelectorAll('.selected-product-placeholder .cart__item')
-
+    if (product_list) {
+    
+    }
     // 表格 排序
 
     // let suffix = "?sort_by=price-ascending"; // 初始的查询参数
