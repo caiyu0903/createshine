@@ -3369,7 +3369,6 @@
                         }
 
                         this.newNavProduct2.classList.add('active')
-                        console.log(cartItemsData.innerHTML)
                         this.newNavItemCart2.innerHTML = cartItemsData.innerHTML;
                         window.sessionStorage.setItem('this.newNavItemCart2.innerHTML', this.newNavItemCart2.innerHTML);
                     }
