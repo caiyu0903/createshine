@@ -70,10 +70,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
     var product_list = document.querySelectorAll('.selected-product-placeholder .cart__item')
     console.log(product_list.length)
-    if (product_list) {
-        for (var i = 0; i <= product_list.length; i++) {
-
-        }
+    var product_list_length = product_list.length;
+    if (product_list_length < 1) {
+       
     }
     if (newProductNavButton) {
         newProductNavButton.addEventListener('click', (e) => {
