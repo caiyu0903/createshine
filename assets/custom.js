@@ -69,10 +69,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
         });
     }
     var product_list = document.querySelectorAll('.selected-product-placeholder .cart__item')
-    console.log(product_list.length)
     var product_list_length = product_list.length;
     if (product_list_length < 1) {
-        console.log("没了")
         sessionStorage.removeItem('bar');
         document.querySelector('.new-product-nav-container').className = 'new-product-nav-container';
     }
