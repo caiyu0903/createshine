@@ -3803,7 +3803,7 @@
             window.sessionStorage.removeItem('this.newNavItemCart2.innerHTML');
             window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
             // 重载当前页面
-            e.target.closest('[data-new-nav-product2]').classLise.remove('active');
+            e.target.closest('[data-new-nav-product2]').classList.remove('active');
             e.target.closest('[data-new-nav-product2] [data-new-nav-link2]').style.display = 'block';
             console.log("nihao")
             const drawer = new CartDrawer();
