@@ -2423,6 +2423,21 @@
                     const button1 = button.closest('[data-new-nav-item-cart]')
                     const button2 = button.closest('[data-new-nav-item-cart2]')
                     if (button.classList.contains(classes$L.disabled)) return;
+                    if (button2) {
+                        console.log("button2 is disabled")
+                        window.sessionStorage.removeItem('this.newNavItemCart2.innerHTML');
+                        window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
+                        this.newNavLink2.style.display = 'block'
+                        this.newNavProduct2.classList.remove('active')
+                        $.ajax({
+                            type: "GET",
+                            url: window.location.href,
+                            success: function (data) {
+                                console.log(data)
+
+                            }
+                        })
+                    }
                     this.updateCart(
                         {
                             id: button.dataset.id,
@@ -2444,21 +2459,7 @@
                             }
                         })
                     }
-                    if (button2) {
-                        console.log("button2 is disabled")
-                        window.sessionStorage.removeItem('this.newNavItemCart2.innerHTML');
-                        window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
-                        this.newNavLink2.style.display = 'block'
-                        this.newNavProduct2.classList.remove('active')
-                        $.ajax({
-                            type: "GET",
-                            url: window.location.href,
-                            success: function (data) {
-                                console.log(data)
-
-                            }
-                        })
-                    }
+                   
                 });
             });
         
