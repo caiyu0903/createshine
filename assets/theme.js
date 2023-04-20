@@ -2426,7 +2426,7 @@
                     console.log(button2, "button2")
                     if (button.classList.contains(classes$L.disabled)) return;
                     if (button2) {
-                        console.log("button2 is disabled")
+                        console.log("button2 is disabled",button.dataset.id)
                         window.sessionStorage.removeItem('this.newNavItemCart2.innerHTML');
                         window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
                         this.newNavLink2.style.display = 'block'
