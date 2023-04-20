@@ -3453,7 +3453,7 @@
                 if (totalPrice1 !== null) {
                     this.newCartTotal.innerHTML = totalPrice1
                 }
-
+                  if(product1 && ){}
             }
         }
 
