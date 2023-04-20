@@ -3809,7 +3809,7 @@
                 id: e.target.dataset.id,
                 quantity: 0,
             })
-            location.reload(true);
+            // location.reload(true);
         }, false);
     }
     const classes$K = {
