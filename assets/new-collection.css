@@ -132,9 +132,7 @@
 }
 
 @media (min-width: 1170px) {
-    .new-product-nav-container .container {
-        padding: 0;
-    }
+  
 }
 
 @media (max-width: 767px) {
