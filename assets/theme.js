@@ -3457,7 +3457,8 @@
                 }
 
                 if(product1 === null && product2 === null ){
-                    this.newProductNavBox.classList.remove('is-open')
+                    console.log("")
+                    // this.newProductNavBox.classList.remove('is-open')
                 }
             }
         }
