@@ -93,6 +93,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             // 重载当前页面
             const drawer = new CartDrawer();
             drawer.updateCart()
+            drawer.initQuantity()
             location.reload(true);
         }, false);
     }
