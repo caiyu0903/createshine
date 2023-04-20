@@ -3803,6 +3803,7 @@
             window.sessionStorage.removeItem('this.newNavItemCart2.innerHTML');
             window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
             // 重载当前页面
+            e.target.closest('[data-new-nav-item-cart2] [data-item]')
             console.log("nihao")
             const drawer = new CartDrawer();
             drawer.updateCart({
