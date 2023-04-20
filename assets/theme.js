@@ -3798,7 +3798,7 @@
         closeButton.addEventListener('click', (e) => {
             e.preventDefault();
             console.log(e.target.closest('[data-new-nav-product2]'))
-            console.log(e.target.closest('[data-new-nav-product2] [data-new-nav-link2]'))
+            console.log(e.target.closest('[data-new-nav-product2] a'))
             console.log(e.target.dataset.id,selectors$U.item)
             return false;
             const item = e.target.closest('[data-new-nav-item-cart2] [data-item]');
