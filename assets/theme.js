@@ -2166,7 +2166,7 @@
         headerWrapper: '[data-header-wrapper]',
         item: '[data-item]',
         itemsHolder: '[data-items-holder]',
-        newProductNav
+        newProductNavBox : '[]',
         newNavItem: '[data-new-nav-item]',
         newNavItemCart: '[data-new-nav-item-cart]',
         newNavProduct: '[data-new-nav-product]',
