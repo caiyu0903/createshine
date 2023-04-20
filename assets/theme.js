@@ -3793,28 +3793,7 @@
     }
 
     window.cart = new CartDrawer();
-    var closeButton = document.querySelector('[data-new-nav-item-cart2] [data-item-remove]');
-    if (closeButton) {
-        closeButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            console.log(e.target.dataset.id,selectors$U.item)
-            const item = e.target.closest('[data-new-nav-item-cart2] [data-item]');
-            console.log("item: ",item)
-            window.sessionStorage.removeItem('this.newNavItemCart2.innerHTML');
-            window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
-            // 重载当前页面
-            console.log("nihao")
-            const drawer = new CartDrawer();
-            drawer.updateCart({
-                id: e.target.dataset.id,
-                quantity: 0,
-            })
-            location.reload(true);
-        }, false);
-    }
-    const classes$K = {
-        sliding: 'is-sliding',
-    };
+  
 
     const slideUp = (target, duration = 500) => {
         if (target.classList.contains(classes$K.sliding)) return;
