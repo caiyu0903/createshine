@@ -74,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     if (product_list_length < 1) {
         console.log("没了")
         sessionStorage.removeItem('bar');
+        document.querySelector('.new-product-nav-container').className = 'new-product-nav-container';
     }
     if (newProductNavButton) {
         newProductNavButton.addEventListener('click', (e) => {
