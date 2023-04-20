@@ -2672,8 +2672,7 @@
                     element.innerHTML = response;
                     const cleanResponse = element.querySelector(selectors$U.apiContent);
                     this.builds(cleanResponse);
-                    console.log("bulids")
-                    this.newCheckout(cleanResponse)
+                    // this.newCheckout(cleanResponse)
                 })
                 .catch((error) => console.log(error));
         }
