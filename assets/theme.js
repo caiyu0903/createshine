@@ -2435,8 +2435,6 @@
                             type: "GET",
                             url: window.location.href,
                             success: function (data) {
-                                console.log(data)
-
                             }
                         })
                     }
@@ -2456,7 +2454,6 @@
                             type: "GET",
                             url: window.location.href,
                             success: function (data) {
-                                console.log(data)
                                 this.newNavLink.style.display = 'block'
                             }
                         })
