@@ -45,6 +45,7 @@
     });
 })();
 
+
 document.addEventListener("DOMContentLoaded", function (event) {
     var newProductNav = document.querySelector(".new-product-nav-container");
     var newProductNavButton = document.querySelector(".new-product-nav-click button");
