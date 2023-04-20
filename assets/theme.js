@@ -2445,6 +2445,7 @@
                         })
                     }
                     if (button2) {
+                        console.log("button2 is disabled")
                         window.sessionStorage.removeItem('this.newNavItemCart2.innerHTML');
                         window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
                         this.newNavLink2.style.display = 'block'
