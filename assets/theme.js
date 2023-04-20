@@ -2477,9 +2477,7 @@
                 const item = button.closest(selectors$U.item);
                 button.addEventListener('click', (event) => {
                     event.preventDefault();
-
                     if (button.classList.contains(classes$L.disabled)) return;
-
                     this.updateCart(
                         {
                             id: button.dataset.id,
