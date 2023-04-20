@@ -2166,6 +2166,7 @@
         headerWrapper: '[data-header-wrapper]',
         item: '[data-item]',
         itemsHolder: '[data-items-holder]',
+        newProductNavBox : '[data-new-product-nav]',
         newNavItem: '[data-new-nav-item]',
         newNavItemCart: '[data-new-nav-item-cart]',
         newNavProduct: '[data-new-nav-product]',
@@ -2218,6 +2219,7 @@
             this.cartDrawerBody = document.querySelector(selectors$U.cartDrawerBody);
             this.cartDrawerInner = document.querySelector(selectors$U.cartDrawerInner);
             this.cartEmpty = document.querySelector(selectors$U.cartEmpty);
+            this.newProductNavBox = document.querySelector(selectors$U.newProductNavBox);
             this.buttonHolder = document.querySelector(selectors$U.buttonHolder);
             this.itemsHolder = document.querySelector(selectors$U.itemsHolder);
             this.newNavItem = document.querySelector(selectors$U.newNavItem);
@@ -2417,13 +2419,26 @@
             cartItemRemove.forEach((button) => {
                 const item = button.closest(selectors$U.item);
                 button.addEventListener('click', (event) => {
-
                     event.preventDefault();
-                    console.log('电机')
                     const button1 = button.closest('[data-new-nav-item-cart]')
                     const button2 = button.closest('[data-new-nav-item-cart2]')
+                    console.log(button2,"button2")
                     if (button.classList.contains(classes$L.disabled)) return;
+                    if (button2) {
+                        console.log("button2 is disabled")
+                        window.sessionStorage.removeItem('this.newNavItemCart2.innerHTML');
+                        window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
+                        this.newNavLink2.style.display = 'block'
+                        this.newNavProduct2.classList.remove('active')
+                        $.ajax({
+                            type: "GET",
+                            url: window.location.href,
+                            success: function (data) {
+                                console.log(data)
 
+                            }
+                        })
+                    }
                     this.updateCart(
                         {
                             id: button.dataset.id,
@@ -2445,23 +2460,10 @@
                             }
                         })
                     }
-                    if (button2) {
-                        window.sessionStorage.removeItem('this.newNavItemCart2.innerHTML');
-                        window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
-                        this.newNavLink2.style.display = 'block'
-                        this.newNavProduct2.classList.remove('active')
-                        $.ajax({
-                            type: "GET",
-                            url: window.location.href,
-                            success: function (data) {
-                                console.log(data)
-
-                            }
-                        })
-                    }
+                   
                 });
             });
-
+        
             if (this.cartCloseErrorMessage) {
                 this.cartCloseErrorMessage.addEventListener('click', (event) => {
                     event.preventDefault();
@@ -2478,9 +2480,7 @@
                 const item = button.closest(selectors$U.item);
                 button.addEventListener('click', (event) => {
                     event.preventDefault();
-
                     if (button.classList.contains(classes$L.disabled)) return;
-
                     this.updateCart(
                         {
                             id: button.dataset.id,
@@ -2672,8 +2672,7 @@
                     element.innerHTML = response;
                     const cleanResponse = element.querySelector(selectors$U.apiContent);
                     this.builds(cleanResponse);
-                    console.log("bulids")
-                    this.newCheckout(cleanResponse)
+                    // this.newCheckout(cleanResponse)
                 })
                 .catch((error) => console.log(error));
         }
@@ -3458,6 +3457,10 @@
                     this.newCartTotal.innerHTML = totalPrice1
                 }
 
+                if(product1 === null && product2 === null ){
+                    console.log("没有了是哪",document.querySelector(selectors$U.newProductNavBox))
+                    // this.newProductNavBox.classList.remove('is-open')
+                }
             }
         }
 
