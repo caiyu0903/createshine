@@ -3808,7 +3808,9 @@
             drawer.updateCart({
                 id: e.target.dataset.id,
                 quantity: 0,
-            })
+            },
+                item
+            );
             // location.reload(true);
         }, false);
     }
