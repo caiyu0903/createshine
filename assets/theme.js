@@ -3795,7 +3795,7 @@
     }
 
     window.cart = new CartDrawer();
-
+    
     const classes$K = {
         sliding: 'is-sliding',
     };
