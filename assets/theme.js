@@ -3797,18 +3797,12 @@
     if (closeButton) {
         closeButton.addEventListener('click', (e) => {
             e.preventDefault();
-            console.log(e.target.closest('[data-new-nav-product2]'))
-            console.log(e.target.closest('[data-new-nav-product2] a'))
-            console.log(e.target.dataset.id,selectors$U.item)
             const item = e.target.closest('[data-new-nav-item-cart2] [data-item]');
-            console.log("item: ",item)
             window.sessionStorage.removeItem('this.newNavItemCart2.innerHTML');
             window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
             // 重载当前页面
             e.target.closest('[data-new-nav-product2]').classList.remove('active');
-            console.log(e.target.closest('[data-new-nav-product2]'))
             // e.target.closest('[data-new-nav-product2] [data-new-nav-link2]').style.display = 'block';
-            console.log("nihao")
             const drawer = new CartDrawer();
             drawer.updateCart({
                 id: e.target.dataset.id,
