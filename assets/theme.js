@@ -3797,7 +3797,7 @@
     if (closeButton) {
         closeButton.addEventListener('click', (e) => {
             e.preventDefault();
-            console.log(e,selectors$U.item)
+            console.log(e.target,selectors$U.item)
             const item = e.closest(selectors$U.item);
             console.log("item: ",item)
             window.sessionStorage.removeItem('this.newNavItemCart2.innerHTML');
