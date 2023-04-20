@@ -90,6 +90,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             window.sessionStorage.removeItem('this.newNavItemCart2.innerHTML');
             window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
             // 重载当前页面
+            const drawer = new CartDrawer();
             location.reload(true);
         }, false);
     }
