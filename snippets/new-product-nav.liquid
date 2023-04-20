@@ -1,0 +1,316 @@
+<style>
+    .new-product-nav-container {
+        background: #fff;
+        bottom: 0;
+        box-shadow: 0 0 32px rgba(0, 0, 0, .1);
+        display: block;
+        left: 0;
+        max-width: 100%;
+        position: fixed;
+        -webkit-transform: translateY(100%);
+        transform: translateY(100%);
+        transition: all .2s linear;
+        width: 100%;
+        z-index: 100;
+    }
+
+    .new-product-nav-container.is-open {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    .new-product-nav-container.is-open .text-expand {
+        display: none
+    }
+
+    .new-product-nav-container .text-collapse {
+        display: none;
+    }
+
+    .new-product-nav-container.is-open .text-collapse {
+        display: inline-block;
+    }
+
+    .toggle-buttons {
+        bottom: 100%;
+        min-width: 160px;
+        position: absolute;
+        right: 30px;
+        text-align: center;
+    }
+
+    .toggle-buttons a {
+        background-color: #4A6178;
+        border-radius: 8px 8px 0 0;
+        box-shadow: 0 -18px 20px 2px rgba(0, 0, 0, .03);
+        color: #fff;
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: .5px;
+        padding: 13px 24px;
+        text-transform: uppercase;
+    }
+
+    .new-product-nav-container.is-open .toggle-buttons a {
+        background: #fff;
+        color: #4A6178;
+    }
+
+
+    .toggle-buttons .icon {
+        height: 16px;
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+        width: 16px;
+    }
+
+    .new-product-nav-container.is-open .toggle-buttons .icon {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    .flex {
+        display: flex;
+    }
+
+    .align-center {
+        align-items: center;
+    }
+
+    .new-product-nav-detail {
+        position: relative;
+
+    }
+
+
+    .new-product-nav-heading {
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 28px;
+        color: #6B6B6B;
+    }
+
+    .selected-product-placeholder {
+        align-self: center;
+        background-color: #f4f4f5;
+        border: 1px dashed #d0d1d4;
+        color: #31282f;
+        cursor: pointer;
+        padding: 36px 20px;
+        width: 300px;
+        display: inline-block;
+    }
+
+    .justify-space {
+        justify-content: space-between;
+    }
+
+    .new-product-nav-inner {
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .view-details-link {
+        padding: 10px;
+    }
+
+    .selected-product-wrap {
+        border-left: 1px solid #e2e2e4;
+        padding-left: 20px;
+    }
+
+    .new-product-connect {
+        font-size: 24px;
+        line-height: 28px;
+        margin: 0 24px;
+    }
+
+    .ring-builder-sticky-title {
+        padding: 0 20px;
+    }
+
+    .new-product-nav-action .cart__foot__inner {
+        width: 100%;
+        padding: 0;
+    }
+
+    .new-product-nav-action form {
+        width: 130px;
+        margin-left: 20px;
+    }
+
+    .new-product-nav-action button {
+        border: 1px solid #7A736C;
+        border-radius: 4px;
+        padding: 12px 14px;
+        color: #7A736C;
+        transition: all .3s ease;
+        background-color: transparent;
+        margin-top: 0;
+    }
+
+    .new-product-nav-action button:hover {
+        background-color: #7A736C;
+        color: #fff;
+    }
+
+    .selected-product-item .cart__quantity {
+        display: none;
+    }
+
+    .selected-product-item .cart__item__meta {
+        display: none;
+    }
+
+    .selected-product-placeholder .cart__item {
+        padding: 0;
+    }
+
+    .selected-product-placeholder.active {
+        padding: 6px 10px;
+    }
+
+    .selected-product-item .cart__item__title {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+    }
+
+    .selected-product-item .cart__item:not(:first-child) {
+        display: none;
+    }
+
+    @media (max-width: 1170px) {
+        .flex-wrap {
+            flex-wrap: wrap;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .ring-builder-sticky-title {
+            padding: 0;
+        }
+
+        .selected-product-wrap {
+            border-left: none;
+            padding-left: 0;
+            width: 100%;
+        }
+
+        .selected-product-placeholder {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 30px 20px;
+        }
+
+        .new-product-nav-action {
+            border-top: 1px solid #E6EBF0;
+            width: 100%;
+            padding-top: 20px;
+            justify-content: space-between;
+        }
+
+        .toggle-buttons {
+            right: 50%;
+            transform: translateX(50%);
+        }
+
+        .new-product-nav-action button {
+            margin-left: 0;
+        }
+    }
+
+</style>
+<div class="new-product-nav-container">
+    <div class="container wrapper cart-bar__form__wrapper">
+        <div class="flex flex-wrap justify-space align-center new-product-nav-inner">
+            <div class="toggle-buttons">
+                <a target="_self" href="javascript:void(0)"><span
+                            class="text-collapse">collapse </span><span class="text-expand"
+                    >Expand </span>
+                    <svg class="icon" width="20" height="21" viewBox="0 0 20 21" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_482_1464)">
+                            <path d="M5 8L9.9925 13L15 8" stroke="#4A6178" stroke-width="2"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_482_1464">
+                                <rect width="20" height="20" fill="white"
+                                      transform="matrix(1.19249e-08 -1 -1 -1.19249e-08 20 20.5)"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </a></div>
+            <div class="new-product-nav-detail flex align-center flex-wrap">
+                <div class="col-3 col-md-12 ring-builder-sticky-title">
+                    <h6 class="new-product-nav-heading">Create your Ring</h6>
+                </div>
+                <div class="selected-product-wrap flex align-center flex-wrap" data-new-nav-item>
+                    <div class="selected-product-placeholder" data-new-nav-product>
+                        <a href="/collections/all-settings" target="_self" data-new-nav-link>
+                            <p class="m-b-0 small font-semi-bold text-center">
+                                Select Your Setting</p>
+                        </a>
+                        <div class="selected-product-item" data-new-nav-item-cart>
+                        
+                        </div>
+                    </div>
+                    <div class="new-product-connect hide-mobile">+</div>
+                    <div class="selected-product-placeholder" data-new-nav-product2>
+                        <a href="/collections/diamonds" target="_self" data-new-nav-link2>
+                            <p class="m-b-0 small font-semi-bold text-center">
+                                Select a Diamond</p>
+                        </a>
+                        <div class="selected-product-item" data-new-nav-item-cart2>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="new-product-nav-action flex align-center">
+                <a class="small view-details-link"
+                   href="/ring-builder/"
+                   target="_self">View Details</a>
+                <p class="new-product-nav-total-price">
+                    <span class="new-total-price" data-new-cart-total></span>
+                </p>
+                
+                <form action="{{ routes.cart_url }}" method="post" novalidate class="form-cart">
+                    <div class="cart__foot__inner"
+                         data-animation="{{ animation_name }}"
+                         data-animation-duration="{{ animation_duration }}"
+                         data-animation-delay="{{ animation_delay }}">
+                        <div class="cart__button"
+                             data-animation="{{ animation_name }}"
+                             data-animation-duration="{{ animation_duration }}"
+                             data-animation-delay="{{ animation_delay }}"
+                                {%- assign animation_delay = animation_delay | plus: animation_delay_increment -%}>
+                            <button type="submit" name="checkout"
+                                    class="btn btn--primary btn--solid btn--full cart__checkout">
+                                {%- if settings.show_lock_icon -%}
+                                    {%- render 'animated-icon', filename: 'icon-lock' -%}
+                                {%- endif -%}
+                                
+                                {{- 'cart.general.checkout' | t -}}
+                            </button>
+                        </div>
+                    </div>
+                    
+                    {%- if settings.enable_additional_buttons and additional_checkout_buttons -%}
+                        <div class="additional-checkout-buttons additional-checkout-buttons--vertical"
+                             data-animation="{{ animation_name }}"
+                             data-animation-duration="{{ animation_duration }}"
+                             data-animation-delay="{{ animation_delay }}"
+                                {%- assign animation_delay = animation_delay | plus: animation_delay_increment -%}>
+                            {{- content_for_additional_checkout_buttons -}}
+                        </div>
+                    {%- endif -%}
+                </form>
+                {% comment %}<button disabled="" class="button m-r-25" data-new-cart-checkout>Checkout</button>{% endcomment %}
+            </div>
+        </div>
+    </div>
+</div>

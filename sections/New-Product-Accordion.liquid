@@ -1,0 +1,1166 @@
+{%- liquid
+    assign animation_anchor = '#Faq--' | append: section.id
+    assign bg_color = section.settings.bg_color
+    assign text_color = section.settings.color
+    assign border_color = section.settings.border_color
+-%}
+
+{%- if section.blocks.size > 0 -%}
+    {%- style -%}
+        #Faq--{{ section.id }} {
+        --PT: {{ section.settings.padding_top }}px;
+        --PB: {{ section.settings.padding_bottom }}px;
+        
+        {%- unless bg_color == 'rgba(0,0,0,0)' or bg_color == blank -%}
+            --bg: {{ bg_color }};
+        {%- endunless -%}
+        
+        {%- unless text_color == 'rgba(0,0,0,0)' or text_color == blank -%}
+            --text: {{ text_color }};
+            --text-dark: {{ text_color | color_saturate: 10 | color_darken: 15 }};
+            --text-a35: {{ text_color | color_modify: 'alpha', 0.35 }};
+            --text-a70: {{ text_color | color_modify: 'alpha', 0.70 }};
+            --text-a75: {{ text_color | color_modify: 'alpha', 0.75 }};
+        {%- endunless -%}
+        
+        {%- unless border_color == 'rgba(0,0,0,0)' or border_color == blank -%}
+            --border: {{ border_color }};
+        {%- endunless -%}
+        }
+    {%- endstyle -%}
+    {%- liquid
+        assign current_variant = product.selected_or_first_available_variant
+    %}
+    
+    {% capture color %}
+        {%- for product_option in product.options_with_values -%}
+            {% assign option = product_option.name %}
+            {% if option == "Color" %}
+                {%- for value in product_option.values -%}
+                    {{ value }}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    {% endcapture %}
+    
+    {% capture clarity %}
+        {%- for product_option in product.options_with_values -%}
+            {% assign option = product_option.name %}
+            {% if option == "Clarity" %}
+                {%- for value in product_option.values -%}
+                    {{ value }}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    {% endcapture %}
+    {% capture shape %}
+        {%- for product_option in product.options_with_values -%}
+            {% assign option = product_option.name %}
+            {% if option == "Shape" %}
+                {%- for value in product_option.values -%}
+                    {{ value }}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    {% endcapture %}
+    {% capture cut %}
+        {% for tags in product.tags %}
+            {{ tags }}
+        {% endfor %}
+    {% endcapture %}
+    <section id="Faq--{{ section.id }}"
+             class="section-faq section-padding"
+             data-section-id="{{ section.id }}"
+             data-section-type="faq">
+        <div class="{{ section.settings.width }}">
+            {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                    {%- when 'app' -%}
+                        <div class="accordion" data-accordion>
+                            {%- if block.settings.title != blank -%}
+                                <h2 class="accordion__title new-accordion-title" data-focus-element tabindex="0"
+                                    data-accordion-toggle>
+                                    {{ block.settings.title }}
+                                    {%- render 'icon-plus' -%}
+                                    {%- render 'icon-minus' -%}
+                                </h2>
+                            {%- endif -%}
+                            <div class="section__body accordion__body new-accordion-body" data-accordion-body>
+                                <div class="faq-list-holder">
+                                    {{ block.settings.liquid }}
+                                </div>
+                            </div>
+                        </div>
+                    {%- when 'info' -%}
+                        <div class="accordion" data-accordion>
+                            {%- if block.settings.title != blank -%}
+                                <h2 class="accordion__title new-accordion-title" data-focus-element tabindex="0"
+                                    data-accordion-toggle>
+                                    {{ block.settings.title }}
+                                    {%- render 'icon-plus' -%}
+                                    {%- render 'icon-minus' -%}
+                                </h2>
+                            {%- endif -%}
+                            
+                            <div class="section__body accordion__body new-accordion-body" data-accordion-body>
+                                <div class="new-product-info">
+                                    <table>
+                                        <tr>
+                                            <th>Diamond SKU:</th>
+                                            <td>{{ current_variant.sku }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Stone:</th>
+                                            <td>{{ shop.name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Shape:</th>
+                                            <td>{{ shape }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Carat Weight:</th>
+                                            <td>{{ product.metafields.custom.carat }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Color:</th>
+                                            <td>{{ color }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Clarity:</th>
+                                            <td>{{ clarity }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Certification:</th>
+                                            <td>{{ product.metafields.custom.lab }}</td>
+                                        </tr>
+                                    </table>
+                                    <table class="new-mobile-table">
+                                        <tr>
+                                            <th>Cut Grade:</th>
+                                            <td>{{ cut }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Fluorescence:</th>
+                                            <td>{{ product.metafields.custom.flourescence }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Depth:</th>
+                                            <td>{{ product.metafields.custom.depth }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Table:</th>
+                                            <td>{{ product.metafields.custom.table }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Polish:</th>
+                                            <td>{{ product.metafields.custom.polish }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Symmetry:</th>
+                                            <td>{{ product.metafields.custom.symmetry }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    {%- when 'text' -%}
+                        <div class="accordion" data-accordion>
+                            {%- if block.settings.title != blank -%}
+                                <h2 class="accordion__title new-accordion-title" data-focus-element tabindex="0"
+                                    data-accordion-toggle>
+                                    {{ block.settings.title }}
+                                    {%- render 'icon-plus' -%}
+                                    {%- render 'icon-minus' -%}
+                                </h2>
+                            {%- endif -%}
+                            
+                            <div class="section__body accordion__body new-accordion-body" data-accordion-body>
+                                <div class="faq-list-holder">
+                                    {{ block.settings.content }}
+                                </div>
+                            </div>
+                        </div>
+                    {%- when 'report' -%}
+                        <div class="accordion" data-accordion>
+                            {%- if block.settings.title != blank -%}
+                                <h2 class="accordion__title new-accordion-title" data-focus-element tabindex="0"
+                                    data-accordion-toggle>
+                                    {{ block.settings.title }}
+                                    {%- render 'icon-plus' -%}
+                                    {%- render 'icon-minus' -%}
+                                </h2>
+                            {%- endif -%}
+                            
+                            <div class="section__body accordion__body new-accordion-body" data-accordion-body>
+                                <div class="new-certification-container">
+                                    {% if product.metafields.custom.lab == 'IGI' %}
+                                        <div class="new-certification-block">
+                                            <div class="new-certification-heading">
+                                                <span><b>Certification Lab:</b> IGI (International Gemological Institute)</span>
+                                                <span>Status: Available</span>
+                                            </div>
+                                            <div class="new-certification-body">
+                                                {{ block.settings.content }}
+                                                <a class="new-certification-link uppercase"
+                                                   href="#">View {{ product.metafields.custom.lab }}
+                                                    Report {% render 'arrows' %}</a>
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <div class="new-certification-block">
+                                            <div class="new-certification-heading">
+                                                <span><b>Certification Lab:</b> GIA (International Gemological Institute)</span>
+                                            
+                                            </div>
+                                            <div class="new-certification-body">
+                                                {{ block.settings.content1 }}
+                                                <a class="new-certification-link uppercase"
+                                                   href="#">View {{ product.metafields.custom.lab }}
+                                                    Report {% render 'arrows' %}</a>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {%- when 'details' -%}
+                        <div class="accordion" data-accordion>
+                            {%- if block.settings.title != blank -%}
+                                <h2 class="accordion__title new-accordion-title" data-focus-element tabindex="0"
+                                    data-accordion-toggle>
+                                    {{ block.settings.title }}
+                                    {%- render 'icon-plus' -%}
+                                    {%- render 'icon-minus' -%}
+                                </h2>
+                            {%- endif -%}
+                            
+                            <div class="section__body accordion__body new-accordion-body" data-accordion-body>
+                                <div class="new-product-details-container">
+                                    <div class="new-product-details-box new-carat">
+                                        {% capture carat %}
+                                            {% assign carats = product.metafields.custom.carat | plus: 0 %}
+                                            {% if carats > 3 and carats < 4 %}
+                                                {{ carats | at_most: 3 }}
+                                            {% elsif carats > 4 and carats < 5 %}
+                                                {{ carats | at_most: 4 }}
+                                            {% elsif carats > 5 %}
+                                                {{ carats | at_most: 5 }}
+                                            {% elsif carats > 2 and carats < 3 %}
+                                                {{ carats | at_most: 2 }}
+                                            {% elsif carats > 1.5 and carats < 2 %}
+                                                {{ carats | at_most: 1.5 }}
+                                            {% elsif carats > 1 and carats < 1.5 %}
+                                                {{ carats | at_most: 1 }}
+                                            {% elsif carats > 0.75 and carats < 1 %}
+                                                {{ carats | at_most: 0.75 }}
+                                            {% elsif carats > 0.5 and carats < 0.75 %}
+                                                {{ carats | at_most: 0.5 }}
+                                            {% elsif carats > 0.25 and carats < 0.5 %}
+                                                {{ carats | at_most: 0.25 }}
+                                            {% endif %}
+                                        {% endcapture %}
+                                        <h4>CARAT</h4>
+                                        <div class="new-product-details">Selected Carat:
+                                            <b>{{ product.metafields.custom.carat }}Ct</b></div>
+                                        <p>{{ block.settings.content }}</p>
+                                        <div class="new-product-details-frame">
+                                            <div class="new-product-bubble-container">
+                                                <div class="new-product-detail-bubble new-{{ carat | replace: '.', '-' | strip }}-bubble">
+                                                    <span>Your Diamond</span>
+                                                    <p>Carat:<b>{{ product.metafields.custom.carat }}CT</b></p>
+                                                </div>
+                                            </div>
+                                            <div class="new-product-detail-image">
+                                                <ul>
+                                                    <li class="new-1-icon">
+                                                        <img src="{{ 'diamonds.png' | asset_url }}"
+                                                             class="lazyload"
+                                                             loading="lazy" alt="diamonds">
+                                                        <span>0.25 CT</span>
+                                                    </li>
+                                                    <li class="new-2-icon">
+                                                        <img src="{{ 'diamonds.png' | asset_url }}"
+                                                             class="lazyload"
+                                                             loading="lazy" alt="diamonds">
+                                                        <span>0.5 CT</span>
+                                                    </li>
+                                                    <li class="new-3-icon">
+                                                        <img src="{{ 'diamonds.png' | asset_url }}"
+                                                             class="lazyload"
+                                                             loading="lazy" alt="diamonds">
+                                                        <span>0.75 CT</span>
+                                                    </li>
+                                                    <li class="new-4-icon">
+                                                        <img src="{{ 'diamonds.png ' | asset_url }}"
+                                                             class="lazyload"
+                                                             loading="lazy" alt="diamonds">
+                                                        <span>1 CT</span>
+                                                    </li>
+                                                    <li class="new-5-icon">
+                                                        <img src="{{ 'diamonds.png' | asset_url }}"
+                                                             class="lazyload"
+                                                             loading="lazy" alt="diamonds">
+                                                        <span>1.5 CT</span>
+                                                    </li>
+                                                    <li class="new-6-icon">
+                                                        <img src="{{ 'diamonds.png' | asset_url }}"
+                                                             class="lazyload"
+                                                             loading="lazy" alt="diamonds">
+                                                        <span>2 CT</span>
+                                                    </li>
+                                                    <li class="new-7-icon">
+                                                        <img src="{{ 'diamonds.png' | asset_url }}"
+                                                             class="lazyload"
+                                                             loading="lazy" alt="diamonds">
+                                                        <span>3 CT</span>
+                                                    </li>
+                                                    <li class="new-8-icon">
+                                                        <img src="{{ 'diamonds.png' | asset_url }}"
+                                                             class="lazyload"
+                                                             loading="lazy" alt="diamonds">
+                                                        <span>4 CT</span>
+                                                    </li>
+                                                    <li class="new-9-icon">
+                                                        <img src="{{ 'diamonds.png' | asset_url }}"
+                                                             class="lazyload"
+                                                             loading="lazy" alt="diamonds">
+                                                        <span>5 CT</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="new-product-details-box new-color">
+                                        <h4>COLOR</h4>
+                                        <div class="new-product-details">Selected Color:
+                                            <b>{{ color }}</b></div>
+                                        <p>{{ block.settings.content }}</p>
+                                        <div class="new-product-details-frame">
+                                            <div class="new-product-bubble-container">
+                                                <div class="new-product-detail-bubble new-{{ color | strip | downcase }}-bubble">
+                                                    <span>Your Diamond</span>
+                                                    <p>Color:<b>{{ color }}</b></p>
+                                                </div>
+                                            </div>
+                                            <div class="new-product-color-image">
+                                                <div class="new-color-img">
+                                                    <img src="{{ 'color.png' | asset_url }}"
+                                                         class="lazyload"
+                                                         loading="lazy" alt="diamonds">
+                                                    <ul>
+                                                        <li><span>D</span></li>
+                                                        <li><span>E</span></li>
+                                                        <li><span>F</span></li>
+                                                        <li><span>G</span></li>
+                                                        <li><span>H</span></li>
+                                                        <li><span>I</span></li>
+                                                        <li><span>J</span></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="new-product-details-box new-cut">
+                                        <h4>Cut</h4>
+                                        <div class="new-product-details">Selected Cut:
+                                            <b>{{ cut }}</b></div>
+                                        <p>{{ block.settings.content }}</p>
+                                        <div class="new-product-details-frame">
+                                            <div class="new-product-bubble-container">
+                                                <div class="new-product-detail-bubble new-{{ cut | strip | downcase | replace: ' ', '-' }}-bubble">
+                                                    <span>Your Diamond</span>
+                                                    <p>Cut:<b>{{ cut }}</b></p>
+                                                </div>
+                                            </div>
+                                            <div class="new-product-cut-image">
+                                                <div class="new-cut-img">
+                                                    <ul>
+                                                        <li>
+                                                            <p></p>
+                                                            <span>Good</span></li>
+                                                        <li>
+                                                            <p></p>
+                                                            <span>Very Good</span>
+                                                        </li>
+                                                        <li>
+                                                            <p></p>
+                                                            <span>Excellent</span>
+                                                        </li>
+                                                        <li>
+                                                            <p></p>
+                                                            <span>Ideal</span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="new-product-details-box new-clarity">
+                                        <h4>Clarity</h4>
+                                        <div class="new-product-details">Selected Clarity:
+                                            <b>{{ clarity }}</b></div>
+                                        <p>{{ block.settings.content }}</p>
+                                        <div class="new-product-details-frame">
+                                            <div class="new-product-bubble-container">
+                                                <div class="new-product-detail-bubble new-{{ clarity | strip | downcase }}-bubble">
+                                                    <span>Your Diamond</span>
+                                                    <p>Clarity:<b>{{ clarity }}</b></p>
+                                                </div>
+                                            </div>
+                                            <div class="new-product-clarity-image">
+                                                <div class="new-clarity-img">
+                                                    <ul>
+                                                        <li>
+                                                            <p></p>
+                                                            <span>SI1, SI2</span>
+                                                        </li>
+                                                        <li><p></p>
+                                                            <span>VS1, VS2</span>
+                                                        </li>
+                                                        <li><p></p>
+                                                            <span>VVS1, VVS2</span>
+                                                        </li>
+                                                        <li><p></p>
+                                                            <span>IF</span>
+                                                        </li>
+                                                        <li><p></p>
+                                                            <span>FL</span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                {% endcase %}
+            {% endfor %}
+        </div>
+    </section>
+{%- else -%}
+    {%- render 'no-blocks' -%}
+{%- endif -%}
+<style>
+    .new-product-info {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .new-product-info table {
+        width: 49%;
+        border: none;
+    }
+
+    .new-product-info table tr:nth-child(2n) {
+        background-color: #FAFBFC;
+    }
+
+    .new-product-info table th {
+        border: none;
+        text-align: left;
+        padding-left: 30px;
+        font-weight: 600;
+    }
+
+    .new-product-details-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .new-product-info table tr td {
+        border: none;
+    }
+
+    .accordion__title.new-accordion-title {
+        color: #2E2E2E;
+        font-weight: 400;
+        font-size: 14px;
+    }
+
+    .new-product-details-box {
+        width: 49%;
+        margin-bottom: 20px;
+        border: 1px solid #99A5B1;
+        border-radius: 4px;
+        background: #FAFBFC;
+        padding: 10px 24px;
+    }
+
+    .new-product-details-box h4 {
+        font-size: 24px;
+        color: #4A6178;
+    }
+
+    .new-product-details b {
+        color: #4A6178;
+    }
+    
+    {% for i in (0..10) %}
+    .new-{{ i }}-icon img {
+        width: calc(12px + 2 * {{ i }}px);
+    }
+    
+    {% endfor %}
+    .new-product-detail-image ul {
+        margin: 0;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .new-product-detail-image li {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 15%;
+    }
+
+    .new-product-detail-image li span {
+        font-size: 14px;
+        line-height: 32px;
+    }
+
+    .new-product-detail-bubble {
+        display: inline-block;
+        background-color: #E6EBF0;
+        padding: 10px 20px;
+        border-radius: 8px;
+        color: #4A6178;
+        position: relative;
+        margin-bottom: 18px;
+    }
+
+    /*.new-product-detail-bubble::before {*/
+    /*    border-width: 12px;*/
+    /*    bottom: 11px;*/
+    /*    margin-left: -12px;*/
+    /*    content: " ";*/
+    /*    border-top-color: #fff;*/
+    /*    border-bottom-width: 0;*/
+    /*    z-index: 2;*/
+    /*    position: absolute;*/
+    /*    display: block;*/
+    /*    width: 0;*/
+    /*    height: 0;*/
+    /*    border-color: transparent;*/
+    /*    border-style: solid;*/
+    /*}*/
+
+    .new-product-detail-bubble::after {
+        content: '';
+        border-width: 11px;
+        bottom: -10px;
+        border-color: transparent;
+        margin-left: -11px;
+        border-top-color: #E6EBF0;
+        border-bottom-width: 0;
+        z-index: 1;
+        position: absolute;
+        display: block;
+        width: 0;
+        height: 0;
+        /* border-color: transparent; */
+        border-style: solid;
+    }
+
+    .new-1-bubble::after {
+
+    }
+
+    .new-product-detail-bubble p {
+        color: #4A6178;
+    }
+
+    .new-color-img img {
+        width: 100%;
+    }
+
+    .new-color-img ul {
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        margin: 0;
+        list-style: none;
+    }
+
+    .new-cut-img ul, .new-clarity-img ul {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0;
+    }
+
+    .new-cut-img ul li {
+        display: block;
+        width: 24%;
+        text-align: center;
+    }
+
+    .new-clarity-img ul li {
+        display: block;
+        width: 19%;
+        text-align: center;
+    }
+
+    .new-cut-img p, .new-clarity-img p {
+        background: #E6EBF0;
+        border-radius: 2px;
+        width: 100%;
+        height: 10px;
+    }
+
+    .new-accordion-body .new-certification-container .new-certification-body {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .new-accordion-body .new-certification-container .new-certification-body p {
+        width: 70%;
+    }
+
+    .new-accordion-body .new-certification-container .new-certification-body .new-certification-link {
+        width: 30%;
+        margin: 0;
+    }
+
+    .new-product-bubble-container {
+        position: relative;
+        padding: 50px 0;
+    }
+
+    /* position */
+    .new-product-detail-bubble {
+        position: absolute;
+        top: 10px;
+    }
+
+    .new-0-25-bubble {
+        left: 0;
+    }
+
+    .new-product-detail-bubble.new-0-25-bubble::after {
+        margin-left: 3px;
+    }
+
+    .new-0-5-bubble {
+        left: 14%;
+    }
+
+    .new-0-75-bubble {
+        left: 24%;
+    }
+
+    .new-1-bubble {
+        left: 36%;
+    }
+
+    .new-1-5-bubble {
+        left: 47%;
+    }
+
+    .new-2-bubble {
+        left: 58%;
+    }
+
+    .new-3-bubble {
+        left: 69%;
+    }
+
+    .new-4-bubble, .new-5-bubble {
+        right: 0;
+    }
+
+    .new-product-detail-bubble.new-4-bubble::after {
+        margin-left: 40px;
+    }
+
+    .new-product-detail-bubble.new-5-bubble::after {
+        margin-left: 90px;
+    }
+
+    .new-d-bubble {
+        left: 0;
+    }
+
+    .new-product-detail-bubble.new-d-bubble::after {
+        margin-left: -1px;
+    }
+
+    .new-e-bubble {
+        left: 18%;
+    }
+
+    .new-f-bubble {
+        left: 33%;
+    }
+
+    .new-g-bubble {
+        left: 48%;
+    }
+
+    .new-h-bubble {
+        left: 62%;
+    }
+
+    .new-i-bubble {
+        left: 71%;
+    }
+
+    .new-j-bubble {
+        right: 0;
+    }
+
+    .new-product-detail-bubble.new-i-bubble::after {
+        margin-left: 25px;
+    }
+
+    .new-product-detail-bubble.new-j-bubble::after {
+        margin-left: 86px;
+    }
+
+    .new-vs1-bubble, .new-vs2-bubble {
+        left: 25%;
+    }
+
+    .new-vvs1-bubble, .new-vvs2-bubble {
+        left: 45%;
+    }
+
+    .new-if-bubble {
+        left: 65%;
+    }
+
+    .new-fl-bubble {
+        right: 0;
+    }
+
+    .new-si1-bubble, .new-si2-bubble {
+        left: 0;
+    }
+
+    .new-product-detail-bubble.new-fl-bubble::after {
+        margin-left: 70px;
+    }
+
+    .new-very-good-bubble {
+        left: 30%;
+    }
+
+    .new-good-bubble {
+        left: 0;
+    }
+
+    .new-excellent-bubble {
+        left: 55%;
+    }
+
+    .new-ideal-bubble, .new-ldeal-bubble {
+        right: 0;
+    }
+
+    .new-product-detail-bubble.new-ideal-bubble::after, .new-product-detail-bubble.new-ldeal-bubble::after {
+        margin-left: 70px;
+    }
+
+    /* position */
+    @media (max-width: 1440px) {
+        .new-product-detail-image li span {
+            font-size: 12px;
+        }
+
+        .new-product-detail-bubble {
+            font-size: 12px;
+        }
+
+        .new-0-25-bubble {
+            left: 0;
+        }
+
+        .new-0-5-bubble {
+            left: 13%;
+        }
+
+        .new-0-75-bubble {
+            left: 23%;
+        }
+
+        .new-1-bubble {
+            left: 34%;
+        }
+
+        .new-1-5-bubble {
+            left: 45%;
+        }
+
+        .new-2-bubble {
+            left: 56%;
+        }
+
+        .new-3-bubble {
+            right: 0;
+        }
+
+        .new-4-bubble, .new-5-bubble {
+            right: 0;
+        }
+
+        .new-product-detail-bubble.new-4-bubble::after {
+            margin-left: 40px;
+        }
+
+        .new-product-detail-bubble.new-5-bubble::after {
+            margin-left: 90px;
+        }
+
+        .new-d-bubble {
+            left: 0;
+        }
+
+        .new-product-detail-bubble.new-d-bubble::after {
+            margin-left: 0;
+        }
+
+        .new-e-bubble {
+            left: 20%;
+        }
+
+        .new-f-bubble {
+            left: 32%;
+        }
+
+        .new-g-bubble {
+            left: 47%;
+        }
+
+        .new-h-bubble {
+            left: 62%;
+        }
+
+        .new-i-bubble {
+            left: 77%;
+        }
+
+        .new-j-bubble {
+            right: 0;
+        }
+
+        .new-product-detail-bubble.new-i-bubble::after {
+            margin-left: 25px;
+        }
+
+        .new-product-detail-bubble.new-j-bubble::after {
+            margin-left: 86px;
+        }
+
+        .new-vs1-bubble, .new-vs2-bubble {
+            left: 25%;
+        }
+
+        .new-vvs1-bubble, .new-vvs2-bubble {
+            left: 45%;
+        }
+
+        .new-if-bubble {
+            left: 65%;
+        }
+
+        .new-fl-bubble {
+            right: 0;
+        }
+
+        .new-si1-bubble, .new-si2-bubble {
+            left: 0;
+        }
+
+        .new-product-detail-bubble.new-fl-bubble::after {
+            margin-left: 70px;
+        }
+
+        .new-very-good-bubble {
+            left: 30%;
+        }
+
+        .new-good-bubble {
+            left: 0;
+        }
+
+        .new-excellent-bubble {
+            left: 55%;
+        }
+
+        .new-ideal-bubble, .new-ldeal-bubble {
+            right: 0;
+        }
+
+    }
+
+    @media (max-width: 1024px) {
+        .new-product-details-box {
+            width: 100%;
+        }
+
+        .new-accordion-body .new-certification-container .new-certification-body p {
+            width: 100%;
+        }
+
+        .new-accordion-body .new-certification-container .new-certification-body .new-certification-link {
+            width: 100%;
+            margin: 10px auto;
+        }
+
+    }
+
+    @media (max-width: 767px) {
+    
+    
+    {% for i in (0..10) %}
+        .new-{{ i }}-icon img {
+            width: calc(10px + 2 * {{ i }}px);
+        }
+    
+    {% endfor %}
+
+        .new-f-bubble {
+            left: 34%;
+        }
+
+        .new-0-5-bubble {
+            left: 12%;
+        }
+
+        .new-product-detail-image li span {
+            font-size: 12px;
+            display: inline-block;
+            max-width: 18px;
+            line-height: 1.3;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .new-product-info table {
+            width: 100%;
+            margin: 0;
+        }
+
+        .new-product-info table.new-mobile-table tr:nth-child(n) {
+            background-color: #FAFBFC;
+        }
+
+        .new-product-info table.new-mobile-table tr:nth-child(2n) {
+            background-color: #fff;
+        }
+
+        .new-product-info table tr {
+            width: 50%;
+        }
+
+        .new-product-info table th {
+            width: 50%;
+            padding-left: 20px;
+        }
+
+        .new-product-detail-bubble {
+            padding: 10px 14px;
+        }
+    }
+</style>
+{% schema %}
+{
+  "name": "New Product Accordion",
+  "class": "accordions-holder",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "FAQ"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "Text"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Width",
+      "default": "wrapper",
+      "options": [
+        {
+          "value": "wrapper",
+          "label": "Normal"
+        },
+        {
+          "value": "wrapper--narrow",
+          "label": "Narrow"
+        },
+        {
+          "value": "custom-width",
+          "label": "Width"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "name": "info",
+      "type": "info",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Frequently asked question"
+        }
+      ]
+    },
+    {
+      "name": "details",
+      "type": "details",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Frequently asked question"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content",
+          "default": "Frequently asked question"
+        }
+      ]
+    },
+    {
+      "name": "report",
+      "type": "report",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Frequently asked question"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "content"
+        },
+        {
+          "type": "richtext",
+          "id": "content1",
+          "label": "content"
+        }
+      ]
+    },
+    {
+      "name": "text",
+      "type": "text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Frequently asked question"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "content"
+        }
+      ]
+    },
+    {
+      "type": "app",
+      "name": "app",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Frequently asked question"
+        },
+        {
+          "type": "liquid",
+          "id": "liquid",
+          "label": "liquid"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "New Product Accordion",
+      "category": "Text",
+      "blocks": [
+        {
+          "type": "text"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer",
+      "custom.pre_footer"
+    ]
+  }
+}
+{% endschema %}

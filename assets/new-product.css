@@ -1,0 +1,73 @@
+.product__vendor {
+    color: #555555;
+}
+
+/* custom description */
+.productView-info-name {
+    margin-right: 12px;
+}
+
+.productView-info-id {
+    font-weight: 600;
+}
+
+.new-product-desc {
+    background-color: #F9F9F9;
+    padding: 16px 24px;
+    color: #555555;
+}
+
+.new-product-desc b {
+    color: #273440;
+}
+
+/* custom description */
+
+/* certification */
+.new-certification-heading {
+    background-color: #E6EBF0;
+    padding: 16px 24px;
+}
+
+.new-certification-body {
+    background-color: #F7FAFC;
+    padding: 16px 24px;
+}
+
+.new-certification-link {
+    background-color: #F7FAFC;
+    border: 1px solid #99A5B1;
+    border-radius: 4px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 14px;
+    max-width: 200px;
+    text-align: center;
+    margin: 10px auto 0;
+}
+
+/* certification */
+.new-product-nav-click {
+    margin-bottom: 20px;
+}
+
+.new-product-nav-click button {
+    width: 100%;
+    color: #fff;
+    background-color: #273440;
+    border: 1px solid #273440;
+}
+
+.new-product-nav-click button:hover {
+    color: #fff;
+    border-color: #273440;
+}
+
+.new-product-nav-click button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
