@@ -2458,9 +2458,7 @@
                     }
                 });
             });
-           if(!cartItemRemove){
-
-             }
+        
             if (this.cartCloseErrorMessage) {
                 this.cartCloseErrorMessage.addEventListener('click', (event) => {
                     event.preventDefault();
@@ -3358,6 +3356,7 @@
                         console.log(newCartItems)
                         // cartItems.classList.add('')
                         window.sessionStorage.setItem('this.newNavItemCart.innerHTML', this.newNavItemCart.innerHTML);
+                   window.se
                     }
 
                     if (location.includes('/collections/diamonds/products')) {
