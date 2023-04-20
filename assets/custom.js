@@ -89,6 +89,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         closeButton.addEventListener('click', (e) => {
             e.preventDefault();
             const item = e.closest(selectors$U.item);
+            console.log("item: ",item)
             window.sessionStorage.removeItem('this.newNavItemCart2.innerHTML');
             window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
             // 重载当前页面
