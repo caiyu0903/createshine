@@ -132,7 +132,9 @@
 }
 
 @media (max-width: 1170px) {
-    .new-product-nav-container
+    .new-product-nav-container .container {
+        
+    }
 }
 
 @media (max-width: 767px) {
