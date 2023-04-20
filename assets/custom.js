@@ -15,31 +15,6 @@
         $(".new-product-nav-container").toggleClass("is-open");
     });
 
-    // 从 sessionStorage 中获取“bar”变量
-    var bar = sessionStorage.getItem('bar');
-
-    // 如果存在值，则使 底部bar 持续显示
-    if (bar === 'visible') {
-        document.querySelector('.new-product-nav-container').className = 'new-product-nav-container is-open';
-    }
-
-    // 添加点击事件侦听器到按钮
-    if (document.querySelector('.new-product-nav-click button')) {
-        document.querySelector('.new-product-nav-click button').addEventListener('click', function () {
-            // 记录“bar”的值以标记已经点击了按钮，并在 sessionStorage 中进行设置
-            sessionStorage.setItem('bar', 'visible');
-            // 显示 底部bar
-            document.querySelector('.new-product-nav-container').className = 'new-product-nav-container is-open';
-        });
-    }
-    var product_list = document.querySelectorAll('.selected-product-placeholder .cart__item')
-    if (product_list) {
-        product_list.forEach((button)={
-            button.addEventListener('click',function(){
-                
-            })
-        })
-    }
     // 表格 排序
 
     // let suffix = "?sort_by=price-ascending"; // 初始的查询参数
@@ -74,6 +49,33 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var newProductNav = document.querySelector(".new-product-nav-container");
     var newProductNavButton = document.querySelector(".new-product-nav-click button");
     var cartDrawerEnabled = window.theme.settings.cartDrawerEnabled;
+
+
+    // 从 sessionStorage 中获取“bar”变量
+    var bar = sessionStorage.getItem('bar');
+
+    // 如果存在值，则使 底部bar 持续显示
+    if (bar === 'visible') {
+        document.querySelector('.new-product-nav-container').className = 'new-product-nav-container is-open';
+    }
+
+    // 添加点击事件侦听器到按钮
+    if (document.querySelector('.new-product-nav-click button')) {
+        document.querySelector('.new-product-nav-click button').addEventListener('click', function () {
+            // 记录“bar”的值以标记已经点击了按钮，并在 sessionStorage 中进行设置
+            sessionStorage.setItem('bar', 'visible');
+            // 显示 底部bar
+            document.querySelector('.new-product-nav-container').className = 'new-product-nav-container is-open';
+        });
+    }
+    var product_list = document.querySelectorAll('.selected-product-placeholder .cart__item')
+    if (product_list) {
+        product_list.forEach((button)={
+            button.addEventListener('click',function(){
+
+            })
+        })
+    }
     if (newProductNavButton) {
         newProductNavButton.addEventListener('click', (e) => {
             e.preventDefault();
