@@ -3455,7 +3455,7 @@
                 }
 
                 if(product1 === null && product2 === null ){
-console.log("是的没有了")
+                 console.log("是的没有了")
                 }
             }
         }
