@@ -3804,6 +3804,7 @@
             window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
             // 重载当前页面
             e.target.closest('[data-new-nav-product2]').classLise.remove('active')
+            e.target.closest('[data-new-nav-product2] ')
             console.log("nihao")
             const drawer = new CartDrawer();
             drawer.updateCart({
