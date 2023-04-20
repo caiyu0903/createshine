@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var product_list_length = product_list.length;
     if (product_list_length < 1) {
         console.log("没了")
-        sessionStorage.removeItem('bar', 'visible');
+        sessionStorage.removeItem('bar');
     }
     if (newProductNavButton) {
         newProductNavButton.addEventListener('click', (e) => {
