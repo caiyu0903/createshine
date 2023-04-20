@@ -2413,7 +2413,7 @@
          */
         newCartEvents() {
             console.log("加载了吗")
-            const cartItemRemove = document.querySelectorAll('[cart__item__remove]');
+            const cartItemRemove = document.querySelectorAll('[data-item-remove]');
             // 购物车卡片删除按钮事件
             console.log(cartItemRemove)
             cartItemRemove.forEach((button) => {
