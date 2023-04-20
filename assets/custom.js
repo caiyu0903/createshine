@@ -91,6 +91,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
             // 重载当前页面
             const drawer = new CartDrawer();
+            drawer.updateCart()
             location.reload(true);
         }, false);
     }
