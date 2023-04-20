@@ -3336,6 +3336,7 @@
          * @return  {Void}
          */
         builds(data) {
+            console.log("builds")
             const cartItemsData = data.querySelector(selectors$U.apiLineItems);
             const upsellItemsData = data.querySelector(selectors$U.apiUpsellItems);
             const button = document.querySelector(selectors$U.newNavCart);
