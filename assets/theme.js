@@ -2419,6 +2419,7 @@
             cartItemRemove.forEach((button) => {
                 const item = button.closest(selectors$U.item);
                 button.addEventListener('click', (event) => {
+                    console.log("点击")
                     event.preventDefault();
                     const button1 = button.closest('[data-new-nav-item-cart]')
                     const button2 = button.closest('[data-new-nav-item-cart2]')
