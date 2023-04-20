@@ -3805,7 +3805,10 @@
             // 重载当前页面
             console.log("nihao")
             const drawer = new CartDrawer();
-            drawer.updateCart()
+            drawer.updateCart({
+                id: e.target.dataset.id,
+                quantity: 0,
+            })
             location.reload(true);
         }, false);
     }
