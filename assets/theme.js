@@ -2417,13 +2417,10 @@
             cartItemRemove.forEach((button) => {
                 const item = button.closest(selectors$U.item);
                 button.addEventListener('click', (event) => {
-
                     event.preventDefault();
-                    console.log('电机')
                     const button1 = button.closest('[data-new-nav-item-cart]')
                     const button2 = button.closest('[data-new-nav-item-cart2]')
                     if (button.classList.contains(classes$L.disabled)) return;
-
                     this.updateCart(
                         {
                             id: button.dataset.id,
