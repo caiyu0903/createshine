@@ -28,7 +28,6 @@
         document.querySelector('.new-product-nav-click button').addEventListener('click', function () {
             // 记录“bar”的值以标记已经点击了按钮，并在 sessionStorage 中进行设置
             sessionStorage.setItem('bar', 'visible');
-
             // 显示 底部bar
             document.querySelector('.new-product-nav-container').className = 'new-product-nav-container is-open';
         });
@@ -86,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             location.reload(true);
         }, false);
     }
-    
+
     var closeButton1 = document.querySelector('[data-new-nav-item-cart] [data-item-remove]');
     if (closeButton1) {
         closeButton1.addEventListener('click', (e) => {
