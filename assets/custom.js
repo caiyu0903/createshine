@@ -69,8 +69,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
         });
     }
     var product_list = document.querySelectorAll('.selected-product-placeholder .cart__item')
+    console.log(product_list.length)
     if (product_list) {
-        for(var i =0;){}
+        for (var i = 0; i <= product_list.length; i++) {
+
+        }
     }
     if (newProductNavButton) {
         newProductNavButton.addEventListener('click', (e) => {
