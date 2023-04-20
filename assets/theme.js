@@ -2458,7 +2458,9 @@
                     }
                 });
             });
+             if(!cartItemRemove){
 
+             }
             if (this.cartCloseErrorMessage) {
                 this.cartCloseErrorMessage.addEventListener('click', (event) => {
                     event.preventDefault();
