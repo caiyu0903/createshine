@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
     var product_list = document.querySelectorAll('.selected-product-placeholder .cart__item')
     if (product_list) {
-        product_list.forEach((button) = {})
+        
     }
     if (newProductNavButton) {
         newProductNavButton.addEventListener('click', (e) => {
