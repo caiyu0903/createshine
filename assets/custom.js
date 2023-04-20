@@ -83,27 +83,27 @@ document.addEventListener("DOMContentLoaded", function (event) {
             }
         }, false);
     }
-    // var closeButton = document.querySelector('[data-new-nav-item-cart2] [data-item-remove]');
-    // if (closeButton) {
-    //     closeButton.addEventListener('click', (e) => {
-    //         e.preventDefault();
-    //         window.sessionStorage.removeItem('this.newNavItemCart2.innerHTML');
-    //         window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
-    //         // 重载当前页面
-    //         location.reload(true);
-    //     }, false);
-    // }
+    var closeButton = document.querySelector('[data-new-nav-item-cart2] [data-item-remove]');
+    if (closeButton) {
+        closeButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.sessionStorage.removeItem('this.newNavItemCart2.innerHTML');
+            window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
+            // 重载当前页面
+            location.reload(true);
+        }, false);
+    }
 
-    // var closeButton1 = document.querySelector('[data-new-nav-item-cart] [data-item-remove]');
-    // if (closeButton1) {
-    //     closeButton1.addEventListener('click', (e) => {
-    //         e.preventDefault();
-    //         window.sessionStorage.removeItem('this.newNavItemCart.innerHTML');
-    //         window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
-    //         // 重载当前页面
-    //         location.reload(true);
-    //     }, false);
-    // }
+    var closeButton1 = document.querySelector('[data-new-nav-item-cart] [data-item-remove]');
+    if (closeButton1) {
+        closeButton1.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.sessionStorage.removeItem('this.newNavItemCart.innerHTML');
+            window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
+            // 重载当前页面
+            location.reload(true);
+        }, false);
+    }
 
 
 })
