@@ -3793,19 +3793,19 @@
     }
 
     window.cart = new CartDrawer();
-    var closeButton = document.querySelector('[data-new-nav-item-cart2] [data-item-remove]');
-    if (closeButton) {
-        closeButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.sessionStorage.removeItem('this.newNavItemCart2.innerHTML');
-            window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
-            // 重载当前页面
-            console.log("nihao")
-            const drawer = new CartDrawer();
-            drawer.updateCart()
-            location.reload(true);
-        }, false);
-    }
+    // var closeButton = document.querySelector('[data-new-nav-item-cart2] [data-item-remove]');
+    // if (closeButton) {
+    //     closeButton.addEventListener('click', (e) => {
+    //         e.preventDefault();
+    //         window.sessionStorage.removeItem('this.newNavItemCart2.innerHTML');
+    //         window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
+    //         // 重载当前页面
+    //         console.log("nihao")
+    //         const drawer = new CartDrawer();
+    //         drawer.updateCart()
+    //         location.reload(true);
+    //     }, false);
+    // }
     const classes$K = {
         sliding: 'is-sliding',
     };
