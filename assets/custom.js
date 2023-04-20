@@ -35,7 +35,9 @@
     var product_list = document.querySelectorAll('.selected-product-placeholder .cart__item')
     if (product_list) {
         product_list.forEach((button)={
-            button.addEventLister
+            button.addEventListener('click',function(){
+                
+            })
         })
     }
     // 表格 排序
