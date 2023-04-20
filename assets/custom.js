@@ -92,7 +92,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
             window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
             // 重载当前页面
             const drawer = new CartDrawer();
-            drawer.updateCart()
+            drawer.updateCart({
+                id: button.dataset.id,
+                    quantity: 0,
+            },
+            item
+            )
             drawer.initQuantity()
             location.reload(true);
         }, false);
