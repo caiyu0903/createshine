@@ -1,4 +1,4 @@
-import './theme.js';
+import '{{  }}';
 
 (function () {
     $(".custom-slider").slider({
