@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     console.log(product_list.length)
     var product_list_length = product_list.length;
     if (product_list_length < 1) {
-       
+        console.log("没了")
     }
     if (newProductNavButton) {
         newProductNavButton.addEventListener('click', (e) => {
