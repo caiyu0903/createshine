@@ -3805,7 +3805,7 @@
             // 重载当前页面
             e.target.closest('[data-new-nav-product2]').classList.remove('active');
             console.log(e.target.closest('[data-new-nav-product2]'))
-            e.target.closest('[data-new-nav-product2] [data-new-nav-link2]').style.display = 'block';
+            // e.target.closest('[data-new-nav-product2] [data-new-nav-link2]').style.display = 'block';
             console.log("nihao")
             const drawer = new CartDrawer();
             drawer.updateCart({
