@@ -32,8 +32,8 @@
             document.querySelector('.new-product-nav-container').className = 'new-product-nav-container is-open';
         });
     }
-    var product_list = document.querySelectorAll('.selected-product-placeholder .')
-    if()
+    var product_list = document.querySelectorAll('.selected-product-placeholder ')
+
     // 表格 排序
 
     // let suffix = "?sort_by=price-ascending"; // 初始的查询参数
