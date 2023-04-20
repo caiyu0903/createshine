@@ -2166,7 +2166,7 @@
         headerWrapper: '[data-header-wrapper]',
         item: '[data-item]',
         itemsHolder: '[data-items-holder]',
-        newProductNavBox : '[data-new-product-nav]',
+        newProductNavBox: '[data-new-product-nav]',
         newNavItem: '[data-new-nav-item]',
         newNavItemCart: '[data-new-nav-item-cart]',
         newNavProduct: '[data-new-nav-product]',
@@ -2415,7 +2415,7 @@
             console.log("加载了吗")
             const cartItemRemove = document.querySelectorAll(selectors$U.cartItemRemove);
             // 购物车卡片删除按钮事件
-           console.log(cartItemRemove)
+            console.log(cartItemRemove)
             cartItemRemove.forEach((button) => {
                 const item = button.closest(selectors$U.item);
                 button.addEventListener('click', (event) => {
@@ -2423,7 +2423,7 @@
                     event.preventDefault();
                     const button1 = button.closest('[data-new-nav-item-cart]')
                     const button2 = button.closest('[data-new-nav-item-cart2]')
-                    console.log(button2,"button2")
+                    console.log(button2, "button2")
                     if (button.classList.contains(classes$L.disabled)) return;
                     if (button2) {
                         console.log("button2 is disabled")
@@ -2461,10 +2461,10 @@
                             }
                         })
                     }
-                   
+
                 });
             });
-        
+
             if (this.cartCloseErrorMessage) {
                 this.cartCloseErrorMessage.addEventListener('click', (event) => {
                     event.preventDefault();
@@ -3457,8 +3457,8 @@
                     this.newCartTotal.innerHTML = totalPrice1
                 }
 
-                if(product1 === null && product2 === null ){
-                    console.log("没有了是哪",document.querySelector(selectors$U.newProductNavBox))
+                if (product1 === null && product2 === null) {
+                    console.log("没有了是哪", document.querySelector(selectors$U.newProductNavBox))
                     // this.newProductNavBox.classList.remove('is-open')
                 }
             }
