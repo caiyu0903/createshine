@@ -84,26 +84,25 @@ document.addEventListener("DOMContentLoaded", function (event) {
             }
         }, false);
     }
-    var closeButton = document.querySelector('[data-new-nav-item-cart2] [data-item-remove]');
-    if (closeButton) {
-        closeButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            const item = e.closest(selectors$U.item);
-            console.log("item: ",item)
-            window.sessionStorage.removeItem('this.newNavItemCart2.innerHTML');
-            window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
-            // 重载当前页面
-            const drawer = new CartDrawer();
-            drawer.updateCart({
-                id: button.dataset.id,
-                    quantity: 0,
-            },
-            item
-            )
-            drawer.initQuantity()
-            location.reload(true);
-        }, false);
-    }
+    // var closeButton = document.querySelector('[data-new-nav-item-cart2] [data-item-remove]');
+    // if (closeButton) {
+    //     closeButton.addEventListener('click', (e) => {
+    //         e.preventDefault();
+    //         const item = e.closest(selectors$U.item);
+    //         window.sessionStorage.removeItem('this.newNavItemCart2.innerHTML');
+    //         window.sessionStorage.removeItem('this.newCartTotal.innerHTML');
+    //         // 重载当前页面
+    //         const drawer = new CartDrawer();
+    //         drawer.updateCart({
+    //             id: button.dataset.id,
+    //                 quantity: 0,
+    //         },
+    //         item
+    //         )
+    //         drawer.initQuantity()
+    //         location.reload(true);
+    //     }, false);
+    // }
 
     var closeButton1 = document.querySelector('[data-new-nav-item-cart] [data-item-remove]');
     if (closeButton1) {
