@@ -65,7 +65,7 @@
             "subheading_size": 3,
             "title": "Our Story",
             "heading_size": 7,
-            "text": "<p>Use this section to create unique side-by-side layouts with various content blocks. Pair text with images, newsletter blocks, products, videos, testimonials and more.<\/p>",
+            "text": "<p>Use this section to create unique side-by-side layouts with various content blocks. Pair text with images, newsletter blocks, products, videos, testimonials and more.Use this section to create unique side-by-side layouts with various content blocks. Pair text with images, newsletter blocks, products, videos, testimonials and more.Use this section to create unique side-by-side layouts with various content blocks. Pair text with images, newsletter blocks, products, videos, testimonials and more.<\/p>",
             "text_size": 3,
             "button_text": "",
             "button_url": "",
@@ -334,7 +334,7 @@
         "width": "wrapper--full-padded",
         "borders": false,
         "padding_top": 0,
-        "padding_bottom": 0
+        "padding_bottom": 50
       }
     }
   },
